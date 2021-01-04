@@ -1,0 +1,59 @@
+/* 
+    pink : ea5455
+    navy: 2d4059
+    black: 343434
+    ivory: fde9c9
+*/
+
+/* reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+}
+
+/* common */
+/* header */
+header {
+    padding: 20px;
+    background: #343434;
+    color: #fff;
+}
+
+/* main - container */
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.item {
+    position: relative;
+    flex-basis: 30vw;
+    margin-bottom: 3vw;
+    cursor: pointer;
+}
+
+.item img {
+    height: calc(30vw * .7);
+    object-fit: cover;
+}
+
+.item:hover div {
+    opacity: 1;
+}
+
+.item div {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    background: rgba(255, 255, 255, .6);
+    opacity: 0;
+    transition: all .2s;
+}
