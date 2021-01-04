@@ -24,12 +24,17 @@ header {
     color: #fff;
 }
 
-/* main - container */
+/* main */
+main {
+    position: relative;
+}
+
+/* main > container */
 #container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 30px;
+    padding-top: 30px;
 }
 
 .item {
@@ -56,4 +61,43 @@ header {
     background: rgba(255, 255, 255, .6);
     opacity: 0;
     transition: all .2s;
+}
+
+/* main > modal */
+#modal {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .7);
+}
+
+#modal.show {
+    display: flex;
+}
+
+#modal_inner {
+    background: #fff;
+    width: 80vw;
+    height: 90vh;
+    padding: 30px;
+    overflow-y: scroll;
+}
+
+#modal_inner::-webkit-scrollbar {
+    display: none;
+}
+
+#modal_inner > * {
+    display: block;
+    margin-top: 20px;
+}
+
+#modal_inner img {
+    max-height: 94%;
+    object-fit: contain;
 }
