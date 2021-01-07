@@ -1,0 +1,43 @@
+/* 
+    pink : ea5455
+    navy: 2d4059
+    black: 343434
+    ivory: fde9c9
+*/
+
+/* reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul, li {
+    list-style: none;
+}
+
+/* common */
+/* header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    height: 120px;
+    background: #343434;
+    color: #fff;
+}
+
+header nav li {
+    display: inline;
+    margin-left: 20px;
+}
