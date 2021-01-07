@@ -12,6 +12,7 @@ public class P_artist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/jsp/artist.jsp").forward(request, response);
+		request.setAttribute("page", "artist");
+		request.getRequestDispatcher("/WEB-INF/jsp/template/template.jsp").forward(request, response);
 	}
 }
