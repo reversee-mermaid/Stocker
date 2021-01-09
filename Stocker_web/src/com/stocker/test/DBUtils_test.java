@@ -11,17 +11,16 @@ public class DBUtils_test {
 		
 		try {
 			conn = DBUtils.getConn();
+			System.out.println("connected");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 		} finally {
-			try {
-				DBUtils.closeConn(conn);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			// closeConn() 내부에서 예외처리를 하기 때문에
+			// 사용하는 측에서 예외처리 불필요
+			DBUtils.closeConn(conn, null);
+			System.out.println("closed");
 		}
 	}
 }

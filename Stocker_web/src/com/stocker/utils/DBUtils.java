@@ -2,6 +2,8 @@ package com.stocker.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class DBUtils {
 	public static Connection getConn() throws Exception {
@@ -13,14 +15,29 @@ public class DBUtils {
 		Class.forName(DRIVER);
 		Connection conn = DriverManager.getConnection(URL, USER, PW);
 		
-		System.out.println("successfully connected");
-		
 		return conn;
 	}
 	
-	//TODO add parameter - PreparedStatement ps, ResultSet rs
-	public static void closeConn(Connection conn) throws Exception {
-		if(conn != null) conn.close();
-		System.out.println("successfully closed");
+	public static void closeConn(Connection conn, PreparedStatement ps) {
+		if(ps != null) {
+			try {
+				ps.close();
+			} catch (Exception e) {}
+		}
+		
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch (Exception e) {}
+		}
+	}
+	
+	public static void closeConn(Connection conn, PreparedStatement ps, ResultSet rs) {
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (Exception e) {}
+		}
+		closeConn(conn, ps);
 	}
 }
