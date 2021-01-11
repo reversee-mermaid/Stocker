@@ -12,6 +12,10 @@ public class P_home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// List<ArticleDto> list = ArticleDao.selectAll();
+		
+		// request.setAttribute("list", list);
 		request.setAttribute("page", "home");
 		request.getRequestDispatcher("/WEB-INF/jsp/template/template.jsp").forward(request, response);
 	}
