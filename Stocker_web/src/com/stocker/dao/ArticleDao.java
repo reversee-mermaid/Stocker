@@ -3,6 +3,7 @@ package com.stocker.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.stocker.dto.ArticleDto;
@@ -28,14 +29,20 @@ public class ArticleDao {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
+			List<ArticleDto> list = new ArrayList<>();
+			
 			while(rs.next()) {
-				System.out.println(rs.getInt("id"));
-				System.out.println(rs.getString("title"));
-				System.out.println(rs.getString("author_nm"));
-				System.out.println(rs.getString("file_nm"));
-				//TODO add ArticleDto to List
+				ArticleDto dto = new ArticleDto();
+				
+				dto.setId(rs.getInt("id"));
+				dto.setTitle(rs.getString("title"));
+				dto.setAuthor_nm(rs.getString("author_nm"));
+				dto.setFile_nm(rs.getString("file_nm"));
+
+				list.add(dto);
 			}
-			//TODO return - List<ArticleDto>
+			
+			return list;
 			
 		} catch (Exception e) {
 			e.printStackTrace();

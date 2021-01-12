@@ -1,6 +1,9 @@
 package com.stocker.test;
 
+import java.util.List;
+
 import com.stocker.dao.ArticleDao;
+import com.stocker.dto.ArticleDto;
 
 public class ArticleDao_test {
 
@@ -8,6 +11,10 @@ public class ArticleDao_test {
 		// TODO test - getArticle(id) method
 		
 		// test - getAllArticle() method
-		ArticleDao.selectAll();
+		List<ArticleDto> list = ArticleDao.selectAll();
+		
+		for(ArticleDto dto : list) {
+			System.out.println(dto);
+		}
 	}
 }

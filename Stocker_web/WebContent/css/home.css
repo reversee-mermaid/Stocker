@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+#content {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 30px;
+}
+
+.item {
+    position: relative;
+    flex-basis: 30vw;
+    margin-bottom: 3vw;
+    cursor: pointer;
+}
+
+.item img {
+    height: calc(30vw * .7);
+    object-fit: cover;
+}
+
+.item:hover div {
+    opacity: 1;
+}
+
+.item div {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    background: rgba(255, 255, 255, .6);
+    opacity: 0;
+    transition: all .2s;
+}
