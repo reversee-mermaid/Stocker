@@ -12,7 +12,7 @@
     <div id="wrap">
         <jsp:include page="./header.jsp"/>
         <main>
-        	<jsp:include page="../${page}.jsp"></jsp:include>
+            <jsp:include page="../${page}.jsp"/>
         </main>
     </div>
 </body>

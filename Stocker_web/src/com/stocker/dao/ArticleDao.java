@@ -10,7 +10,7 @@ import com.stocker.dto.ArticleDto;
 import com.stocker.utils.DBUtils;
 
 public class ArticleDao {
-	//TODO define - selectAll method
+	
 	public static List<ArticleDto> selectAll() {
 
 		Connection conn = null;
@@ -55,6 +55,47 @@ public class ArticleDao {
 	}
 	
 	//TODO define - select method
+	public static ArticleDto select(int id) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT "
+				+ "title, caption, regdate, file_nm ,nm AS author_nm "
+				+ "FROM t_article AS a "
+				+ "JOIN t_user AS u "
+				+ "ON a.author_id = u.id "
+				+ "WHERE a.id = ?";
+		
+		try {
+			
+			conn = DBUtils.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				ArticleDto dto = new ArticleDto();
+				
+				dto.setTitle(rs.getString("title"));
+				dto.setCaption(rs.getString("caption"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setFile_nm(rs.getString("file_nm"));
+				dto.setAuthor_nm(rs.getString("author_nm"));
+				
+				return dto;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		} finally {
+			DBUtils.closeConn(conn, ps, rs);
+		}
+		
+		return null;
+	}
 	
 	//TODO define - insert method
 	

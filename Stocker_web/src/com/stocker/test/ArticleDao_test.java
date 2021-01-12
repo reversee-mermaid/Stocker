@@ -9,6 +9,8 @@ public class ArticleDao_test {
 
 	public static void main(String[] args) {
 		// TODO test - getArticle(id) method
+		ArticleDto article = ArticleDao.select(2);
+		System.out.println("Title : " + article.getTitle());
 		
 		// test - getAllArticle() method
 		List<ArticleDto> list = ArticleDao.selectAll();
