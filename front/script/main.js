@@ -20,24 +20,24 @@ function showModal() {
     modal.classList.add('show');
 }
 
-function createEl(obj) {
-    const el = document.createElement('div');
-    el.className = 'item';
-    el.innerHTML = `
-        <img src="${obj.file_path}" alt="open modal - ${obj.title}">
-        <div>
-            <strong>${obj.title}</strong>
-            <small>${obj.author_name}</small>
-        </div>
-    `;
+// function createEl(obj) {
+//     const el = document.createElement('div');
+//     el.className = 'item';
+//     el.innerHTML = `
+//         <img src="${obj.file_path}" alt="open modal - ${obj.title}">
+//         <div>
+//             <strong>${obj.title}</strong>
+//             <small>${obj.author_name}</small>
+//         </div>
+//     `;
 
-    el.onclick = function() {
-        setModal(obj);
-        showModal();
-    }
+//     el.onclick = function() {
+//         setModal(obj);
+//         showModal();
+//     }
 
-    return el;
-}
+//     return el;
+// }
 
 function init() {
     const container = document.getElementById('container');

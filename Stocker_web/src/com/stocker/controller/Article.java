@@ -18,15 +18,11 @@ public class Article extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//TODO ArticleDto article = ArticleDao.select(id);
 		//request.getParameter("id")로 전달 된 pk 값으로 select
-		
 		String id = request.getParameter("id");
 		ArticleDto dto = ArticleDao.select(Integer.parseInt(id));
 		
 		//TODO ArticleDto 객체를 json으로 변환하여 response.getWriter().print()
-		//maven jackson library 사용
-		
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(dto);
 		response.setContentType("application/json");

@@ -8,11 +8,11 @@ import com.stocker.dto.ArticleDto;
 public class ArticleDao_test {
 
 	public static void main(String[] args) {
-		// TODO test - getArticle(id) method
-		ArticleDto article = ArticleDao.select(2);
-		System.out.println("Title : " + article.getTitle());
+		// select(id)
+		ArticleDto data = ArticleDao.select(2);
+		System.out.println(data);
 		
-		// test - getAllArticle() method
+		// selectAll()
 		List<ArticleDto> list = ArticleDao.selectAll();
 		
 		for(ArticleDto dto : list) {

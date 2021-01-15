@@ -1,3 +1,4 @@
+
 function setModal(data) {
     const modal_inner = document.getElementById('modal_inner');
     
@@ -13,7 +14,18 @@ function setModal(data) {
 
 function toggleModal() {
 	const modal = document.getElementById('modal');
-	modal.classList.toggle('hide');
+	// modal.classList.toggle('hide');
+
+	classToggle(modal, 'hide');
+}
+
+function classToggle(el, name) {
+	if(el.classList.contains(name)) {
+		el.classList.remove(name);
+
+	} else {
+		el.classList.add(name);
+	}
 }
 
 function init() {
@@ -30,11 +42,13 @@ function init() {
 	        fetch('/article?id=' + id)
 	        	.then(res => res.json())
 	        	.then(data => {
-	        	    setModal(data);
-	        	    toggleModal();
+					console.log(data)
+	        	    // setModal(data);
+	        	    // toggleModal();
 	        	})
-    	})
-	})
+    })
+})
+	
 }
 
 init();

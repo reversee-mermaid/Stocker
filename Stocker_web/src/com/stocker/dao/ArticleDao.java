@@ -54,7 +54,6 @@ public class ArticleDao {
 		return null;
 	}
 	
-	//TODO define - select method
 	public static ArticleDto select(int id) {
 		
 		Connection conn = null;
@@ -62,7 +61,7 @@ public class ArticleDao {
 		ResultSet rs = null;
 		
 		String sql = "SELECT "
-				+ "title, caption, regdate, file_nm ,nm AS author_nm "
+				+ "title, caption, regdate, file_nm, nm AS author_nm "
 				+ "FROM t_article AS a "
 				+ "JOIN t_user AS u "
 				+ "ON a.author_id = u.id "
@@ -78,6 +77,7 @@ public class ArticleDao {
 			if(rs.next()) {
 				ArticleDto dto = new ArticleDto();
 				
+				dto.setId(id);
 				dto.setTitle(rs.getString("title"));
 				dto.setCaption(rs.getString("caption"));
 				dto.setRegdate(rs.getString("regdate"));
