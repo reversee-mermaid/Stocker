@@ -42,3 +42,11 @@ header nav li {
     display: inline;
     margin-left: 20px;
 }
+
+main {
+	padding: 40px;
+}
+
+#content h2 {
+	margin-bottom: 20px;
+}

@@ -22,6 +22,7 @@ public class P_home extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("page", "home");
+		request.setAttribute("styles", new String[] {"home"});
 		request.getRequestDispatcher("/WEB-INF/jsp/template/template.jsp").forward(request, response);
 	}
 }
