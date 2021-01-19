@@ -6,7 +6,7 @@
     <form action="/login" method="post">
     	<input type="text" name="email" id="email" placeholder="Email" autocomplete="off" required>
     	<input type="password" name="pw" id="pw" placeholder="Password" required>
-    	<input type="submit" value="log in">
+    	<input type="submit" value="Log in">
     </form>
 </section>
 

@@ -3,11 +3,21 @@
 <section id="content">
     <h2>Signup page</h2>
     <p class="err-msg">${err_msg}</p>
+    
     <form action="/signup" method="post">
-    	<input type="text" name="email" id="email" placeholder="Enter your email address" autocomplete="off" required>
-    	<input type="text" name="nm" id="nm" placeholder="Enter your full name" autocomplete="off" required>
-    	<input type="password" name="pw" id="pw" placeholder="Create your password" required>
-    	<input type="password" id="pw_repeat" placeholder="Reapeat your password" required>
+    
+    	<input type="email" name="email" id="email" 
+    		placeholder="Enter your email address" autocomplete="off" required>
+    		
+    	<input type="text" name="nm" id="nm" 
+    		placeholder="Enter your full name" autocomplete="off" required>
+    		
+    	<input type="password" name="pw" id="pw" 
+    		placeholder="Create your password" required>
+    		
+    	<input type="password" id="pw_repeat" 
+    		placeholder="Repeat your password" required>
+    		
     	<input type="submit" value="Sign up">
     </form>
 </section>

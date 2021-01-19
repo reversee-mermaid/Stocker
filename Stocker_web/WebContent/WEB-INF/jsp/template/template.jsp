@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Stocker - ${page}</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/common.css">
 <c:forEach var="file_nm" items="${styles}">
 	<link rel="stylesheet" href="/css/${file_nm}.css">
