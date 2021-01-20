@@ -1,0 +1,22 @@
+@charset "UTF-8";
+main {
+	text-align: center;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto 20px;
+	max-width: 400px;
+}
+
+input {
+	padding: 10px;	
+}
+
+input:not(:last-child) {
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #343434;
+	margin-bottom: 10px;
+}
