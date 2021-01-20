@@ -71,6 +71,30 @@ public class UserDao {
 	}
 	
 	//update
+	public static int update(User dto) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		String sql = "UPDATE t_user SET nm = ? WHERE id = ?";
+		
+		try {
+			
+			conn = DBUtils.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getNm());
+			ps.setInt(2, dto.getId());
+			
+			return ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.closeConn(conn, ps);
+		}
+		
+		return 0;
+	}
 	
 	//delete
 }

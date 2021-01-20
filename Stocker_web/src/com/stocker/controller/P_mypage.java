@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.stocker.dao.UserDao;
+import com.stocker.model.User;
+
 @WebServlet("/mypage")
 public class P_mypage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,4 +20,14 @@ public class P_mypage extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/jsp/template/template.jsp").forward(request, response);
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		User dto = (User) request.getSession().getAttribute("current_user");
+		dto.setNm(request.getParameter("nm"));
+		
+		UserDao.update(dto);
+		
+		response.sendRedirect("/mypage");
+	}
 }
