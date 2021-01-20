@@ -88,7 +88,7 @@ public class UserDao {
 			return ps.executeUpdate();
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			// handle exception
 		} finally {
 			DBUtils.closeConn(conn, ps);
 		}
@@ -97,4 +97,26 @@ public class UserDao {
 	}
 	
 	//delete
+	public static int delete(User dto) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		String sql = "DELETE FROM t_user WHERE id = ?";
+		
+		try {
+			conn = DBUtils.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, dto.getId());
+			
+			return ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.closeConn(conn, ps);
+		}
+		
+		return 0;
+	}
 }
