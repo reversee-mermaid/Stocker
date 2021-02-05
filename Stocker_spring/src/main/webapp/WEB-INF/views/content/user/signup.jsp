@@ -7,16 +7,16 @@
 	<form id="form">
 		<p class="err_message">${err_message}</p>
 
-		<input type="email" name="email" id="email"
+		<input type="email" name="email"
 			placeholder="Enter your email address" autocomplete="off" required>
 
-		<input type="text" name="nm" id="nm"
+		<input type="text" name="nm"
 			placeholder="Enter your full name" autocomplete="off" required>
 
-		<input type="password" name="pw" id="pw"
+		<input type="password" name="pw"
 			placeholder="Create your password" required>
 			
-		<input type="password" id="pw_repeat"             
+		<input type="password" name="pw_repeat"             
 			placeholder="Repeat your password" required> 
 			
 		<input type="button" value="Sign up" id="signup_btn">
@@ -27,3 +27,5 @@
 	</ul>
 	
 </section>
+
+<script type="module" src="/res/js/signup.js"></script>

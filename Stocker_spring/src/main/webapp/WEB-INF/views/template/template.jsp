@@ -37,7 +37,7 @@
 					<c:choose>
 						<c:when test="${sessionScope.current_user == null}">
 							<li><a href="/user/login">Login</a></li>
-							<li><a href="/user/signup">Signup</a></li>
+							<li><a href="/user/signup">Sign up</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><b>${sessionScope.current_user.nm}</b></li>
