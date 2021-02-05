@@ -37,6 +37,14 @@ public class UserController {
 	@GetMapping("/login")
 	public void login() {}
 	
+	@ResponseBody
+	@PostMapping("/login")
+	public Map<String, Object> login(@RequestBody User param, HttpSession session) {
+		Map<String, Object> json = new HashMap<>();
+		json.put("code", service.login(param, session));		
+		return json;
+	}
+	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
