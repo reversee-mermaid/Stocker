@@ -27,3 +27,5 @@
 	</ul>
 	
 </section>
+
+<script type="module" src="/res/js/signup.js"></script>

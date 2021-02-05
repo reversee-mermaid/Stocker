@@ -33,9 +33,9 @@
 	
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"/>
-		<beans:property name="typeAliasesPackage" value="defaultPackageName"/>
+		<beans:property name="typeAliasesPackage" value="com.trainspotting.stocker"/>
 	</beans:bean>
-	<mybatis-spring:scan base-package="defaultPackageName"/>
+	<mybatis-spring:scan base-package="com.trainspotting.stocker"/>
 	
 	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions">
