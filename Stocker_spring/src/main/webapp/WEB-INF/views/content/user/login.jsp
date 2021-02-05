@@ -22,3 +22,5 @@
 	</ul>
 	
 </section>
+
+<script type="module" src="/res/js/login.js"></script>
