@@ -9,4 +9,5 @@ import com.trainspotting.stocker.model.ArticleDto;
 public interface ArticleMapper {
 	int insert(Article param);
 	int insertArticleTag(ArticleDto param);
+	ArticleDto selectArticle(ArticleDto param);
 }

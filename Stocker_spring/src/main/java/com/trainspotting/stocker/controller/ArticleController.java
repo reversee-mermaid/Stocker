@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.trainspotting.stocker.model.ArticleDto;
@@ -35,6 +36,11 @@ public class ArticleController {
 		json.put("id", param.getId());
 		
 		return json;
+	}
+	
+	@GetMapping("/detail")
+	public void detail(ArticleDto param, Model model) {
+		model.addAttribute("article", service.detail(param));
 	}
 	
 	private List<Tag> generateTagList(int[] tags) {
