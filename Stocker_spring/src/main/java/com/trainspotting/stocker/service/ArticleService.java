@@ -37,11 +37,7 @@ public class ArticleService {
 			mapper.insert(param);
 			
 			// insert t_article_tag
-			List<ArticleTag> list = new ArrayList<>();
-			for(int tag_id : param.getTags()) {
-				list.add(new ArticleTag(param.getId(), tag_id));
-			}
-			mapper.insertArticleTag(list);
+			mapper.insertArticleTag(param);
 			
 			return 1;
 			

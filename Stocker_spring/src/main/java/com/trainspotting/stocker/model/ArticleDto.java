@@ -6,11 +6,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ArticleDto extends Article {
 	private MultipartFile file;
-	private int[] tags;
+	private List<Tag> tagList;
 	
 	@Override
 	public String toString() {
-		return "ArticleDto [file=" + file + ", tags=" + tags + ", " + super.toString() + "]";
+		return "ArticleDto [file=" + file + ", tags=" + tagList + ", " + super.toString() + "]";
 	}
 	public MultipartFile getFile() {
 		return file;
@@ -18,10 +18,10 @@ public class ArticleDto extends Article {
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
-	public int[] getTags() {
-		return tags;
+	public List<Tag> getTagList() {
+		return tagList;
 	}
-	public void setTags(int[] tags) {
-		this.tags = tags;
+	public void setTagList(List<Tag> tagList) {
+		this.tagList = tagList;
 	}
 }
