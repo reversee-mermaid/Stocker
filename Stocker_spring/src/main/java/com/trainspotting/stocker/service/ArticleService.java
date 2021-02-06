@@ -1,8 +1,5 @@
 package com.trainspotting.stocker.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +34,7 @@ public class ArticleService {
 			mapper.insert(param);
 			
 			// insert t_article_tag
-			List<ArticleTag> list = new ArrayList<>();
-			for(int tag_id : param.getTags()) {
-				list.add(new ArticleTag(param.getId(), tag_id));
-			}
-			mapper.insertArticleTag(list);
+			mapper.insertArticleTag(param);
 			
 			return 1;
 			
@@ -49,4 +42,13 @@ public class ArticleService {
 		
 		return 0;
 	};
+
+	public ArticleDto detail(ArticleDto param) {
+		
+		try {
+			return mapper.selectArticle(param);
+		} catch (Exception e) {}
+		
+		return null;
+	}
 }

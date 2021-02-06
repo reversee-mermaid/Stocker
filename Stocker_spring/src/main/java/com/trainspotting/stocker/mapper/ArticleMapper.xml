@@ -13,8 +13,32 @@
 		INSERT INTO t_article_tag 
 		(article_id, tag_id)
 		VALUES
-		<foreach collection="list" item="item" separator=", ">
-			(#{item.article_id}, ${item.tag_id})
+		<foreach collection="tagList" item="tag" separator=", ">
+			(#{id}, ${tag.id})
 		</foreach>
 	</insert>
+	
+	<resultMap id="articleResult" type="ArticleDto">
+		<result property="id" column="id"/>
+		<collection property="tagList" column="id" ofType="Tag" select="selectArticleTagAll"/>
+	</resultMap>
+	
+	<select  id="selectArticle" resultMap="articleResult">
+		SELECT
+			a.*,
+			u.nm AS author_nm
+		FROM t_article AS a
+		JOIN t_user AS u
+		ON a.author_id = u.id
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="selectArticleTagAll" resultType="Tag">
+		SELECT t.id, t.nm, t.slug
+		FROM t_tag AS t
+		JOIN t_article_tag AS a
+		ON t.id = a.tag_id
+		WHERE a.article_id = #{id}
+		ORDER BY t.order_no
+	</select>
 </mapper>
