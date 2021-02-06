@@ -1,4 +1,5 @@
-import { checkValidityAll, setErrMessage } from '/res/js/module/form.js'
+import { setErrMessage } from '/res/js/module/common.js'
+import { checkValidityAll } from '/res/js/module/form.js'
 import { getResponseJSON, getRequestInit } from '/res/js/module/request.js'
 
 const { email, nm, pw, pw_repeat } = form
