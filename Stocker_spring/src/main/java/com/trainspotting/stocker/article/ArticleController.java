@@ -42,6 +42,15 @@ public class ArticleController {
 		model.addAttribute("article", service.detail(param));
 	}
 	
+	@ResponseBody
+	@GetMapping("/detail/thumb")
+	public Map<String, Object> thumb(ArticleDto param) {
+		Map<String, Object> json = new HashMap<>();
+		json.put("article", service.detail(param));
+		
+		return json;
+	}
+	
 	private List<Tag> generateTagList(int[] tags) {
 		List<Tag> list = new ArrayList<>();
 		for(int tag_id : tags) {

@@ -8,14 +8,15 @@
 			</c:forEach>
 		</ul>
 		
-		<h2 class="article-title">Title: ${article.title}</h2>
-		<p>Caption: ${article.caption}</p>
-		<small>@${article.author_nm} | <span>${article.regdate}</span></small>
+		<h2 class="article_title">Title: ${article.title}</h2>
+		<p class="article_caption">Caption: ${article.caption}</p>
+		<small class="article_author">@${article.author_nm}</small>
+		<small class="article_regdate">${article.regdate}</small>
 		
-		<img alt="${article.title}" src="/res/image/${article.author_id}/${article.file_nm}">
+		<img class="article_img" alt="${article.title}" src="/res/image/${article.author_id}/${article.file_nm}">
 		
 		<ul class="btn_container">
-			<button type="button">
+			<button class="download_btn" type="button">
 				<a href="/res/image/${article.author_id}/${article.file_nm}" download>Download(❁´◡`❁)</a>
 			</button>
 		</ul>
