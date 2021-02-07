@@ -54,8 +54,7 @@ public class ArticleService {
 	}
 	
 	public List<ArticleDto> selectList() {
-		mapper.selectArticleAll();
 		
-		return null;
+		return mapper.selectArticleAll();
 	}
 }

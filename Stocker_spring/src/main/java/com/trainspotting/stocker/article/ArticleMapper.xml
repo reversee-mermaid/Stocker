@@ -25,11 +25,7 @@
 	
 	<select  id="selectArticle" resultMap="articleResult">
 		SELECT
-			a.*,
-			u.nm AS author_nm
-		FROM t_article AS a
-		JOIN t_user AS u
-		ON a.author_id = u.id
+			<include refid="article"/>
 		WHERE a.id = #{id}
 	</select>
 	
@@ -41,4 +37,18 @@
 		WHERE a.article_id = #{id}
 		ORDER BY t.order_no
 	</select>
+	
+	<select id="selectArticleAll" resultType="ArticleDto">
+		SELECT 
+			<include refid="article"/>
+		ORDER BY a.id DESC
+	</select>
+	
+	<sql id="article">
+		a.*,
+			u.nm AS author_nm
+		FROM t_article AS a
+		JOIN t_user AS u
+		ON a.author_id = u.id
+	</sql>
 </mapper>

@@ -17,9 +17,11 @@ public class IndexController {
 	public String index() {
 		return "redirect:/home";
 	}
-	
+
 	@GetMapping("/home")
-	public void home() {}
+	public void home(Model model) {
+		model.addAttribute("list", articleService.selectList());
+	}
 	
 	@GetMapping("/explore")
 	public void explore() {}
