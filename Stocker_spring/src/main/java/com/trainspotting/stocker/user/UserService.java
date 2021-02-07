@@ -1,11 +1,10 @@
-package com.trainspotting.stocker.service;
+package com.trainspotting.stocker.user;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trainspotting.stocker.mapper.UserMapper;
 import com.trainspotting.stocker.model.User;
 import com.trainspotting.stocker.util.SecurityUtil;
 
