@@ -1,4 +1,4 @@
-package com.trainspotting.stocker.controller;
+package com.trainspotting.stocker.user;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trainspotting.stocker.model.User;
-import com.trainspotting.stocker.service.UserService;
 
 @Controller
 @RequestMapping("/user")

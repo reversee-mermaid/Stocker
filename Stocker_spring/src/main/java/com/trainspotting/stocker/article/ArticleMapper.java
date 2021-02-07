@@ -1,4 +1,6 @@
-package com.trainspotting.stocker.mapper;
+package com.trainspotting.stocker.article;
+
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,4 +12,5 @@ public interface ArticleMapper {
 	int insert(Article param);
 	int insertArticleTag(ArticleDto param);
 	ArticleDto selectArticle(ArticleDto param);
+	List<ArticleDto> selectArticleAll();
 }

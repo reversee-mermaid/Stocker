@@ -1,4 +1,4 @@
-package com.trainspotting.stocker.mapper;
+package com.trainspotting.stocker.user;
 
 import org.apache.ibatis.annotations.Mapper;
 

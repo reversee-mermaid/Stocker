@@ -1,10 +1,17 @@
-package com.trainspotting.stocker.controller;
+package com.trainspotting.stocker;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.trainspotting.stocker.article.ArticleService;
 
 @Controller
 public class IndexController {
+	
+	@Autowired
+	private ArticleService articleService;
 	
 	@GetMapping("/")
 	public String index() {

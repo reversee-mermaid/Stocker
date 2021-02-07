@@ -1,4 +1,4 @@
-package com.trainspotting.stocker.controller;
+package com.trainspotting.stocker.article;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.trainspotting.stocker.model.ArticleDto;
 import com.trainspotting.stocker.model.Tag;
-import com.trainspotting.stocker.service.ArticleService;
 
 @Controller
 @RequestMapping("/article")

@@ -1,4 +1,4 @@
-package com.trainspotting.stocker.mapper;
+package com.trainspotting.stocker.tag;
 
 import java.util.List;
 

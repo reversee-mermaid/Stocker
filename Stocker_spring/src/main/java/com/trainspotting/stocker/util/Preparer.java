@@ -9,8 +9,8 @@ import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.trainspotting.stocker.mapper.TagMapper;
 import com.trainspotting.stocker.model.Tag;
+import com.trainspotting.stocker.tag.TagMapper;
 
 @Component("Preparer")
 public class Preparer implements ViewPreparer {

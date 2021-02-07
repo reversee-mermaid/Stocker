@@ -1,11 +1,12 @@
-package com.trainspotting.stocker.service;
+package com.trainspotting.stocker.article;
+
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trainspotting.stocker.mapper.ArticleMapper;
 import com.trainspotting.stocker.model.*;
 import com.trainspotting.stocker.util.FileUtil;
 
@@ -48,6 +49,12 @@ public class ArticleService {
 		try {
 			return mapper.selectArticle(param);
 		} catch (Exception e) {}
+		
+		return null;
+	}
+	
+	public List<ArticleDto> selectList() {
+		mapper.selectArticleAll();
 		
 		return null;
 	}
