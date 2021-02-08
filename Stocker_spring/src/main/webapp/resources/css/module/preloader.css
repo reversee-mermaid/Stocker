@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+#loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: rgba(0, 0, 0, .6);
+	color: #fff;
+	z-index: 10;
+}
+
+#loader #spin {
+	width: 80px;
+	height: 80px;
+	border: 10px solid #eee;
+	border-top: 10px solid rgba(0, 0, 0, 0);
+	border-radius: 50%;
+	animation: spin 1.4s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg)}
+	100% { transform: rotate(360deg)}
+}
