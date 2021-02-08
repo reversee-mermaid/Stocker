@@ -10,7 +10,7 @@
 			<div class="thumb" data-id="${article.id}">
 
 				<img class="thumb_img" alt="Open model - ${article.title}"
-					src="/res/image/${article.author_id }/${article.file_nm}">
+					src="/res/image/${article.author_id }/t_${article.file_nm}">
 
 				<p class="thumb_txt">
 					<strong>${article.title}</strong> <small>${article.author_nm}</small>
