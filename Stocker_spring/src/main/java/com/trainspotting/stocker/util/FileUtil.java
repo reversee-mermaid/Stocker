@@ -44,7 +44,7 @@ public class FileUtil {
 		double origin_w = origin_image.getWidth();
 		double origin_h = origin_image.getHeight();
 		
-		double ratio = (MAX / Math.max(origin_w, origin_h));
+		double ratio = (MAX / origin_w);
 		
 		int thumb_w = (int) (origin_w * ratio);
 		int thumb_h = (int) (origin_h * ratio);
@@ -63,6 +63,6 @@ public class FileUtil {
 		File origin_file = new File(savePath, fileName);
 		file.transferTo(origin_file);
 		
-		saveThumb(origin_file, savePath, 500);
+		saveThumb(origin_file, savePath, 600);
 	}
 }
