@@ -25,22 +25,7 @@
 </c:if>
 
 <div id="modal" class="hide">
-	<article id="modal_inner" class="article">
-		<ul class="tag_list"></ul>
-
-		<h2 class="article_title"></h2>
-		<p class="article_caption"></p>
-		<small class="article_author"></small>
-		<small class="article_regdate"></small>
-
-		<img class="article_img" alt="" src="">
-
-		<ul class="btn_container">
-			<button class="download_btn" type="button">
-				<a download>Download(❁´◡`❁)</a>
-			</button>
-		</ul>
-	</article>
+	<c:import url="/WEB-INF/views/template/article.jsp"/>
 </div>
 
-<script type="text/javascript" src="/res/js/modal.js"></script>
+<script type="module" src="/res/js/home.js"></script>
