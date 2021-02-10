@@ -10,14 +10,8 @@ function createEl(tagName, className) {
 	return el
 }
 
-function createIconEl(text) {
-	const span = createEl('span', 'material-icons')
-	span.innerText = text
-	return span
-}
-
 export function setArticle(data) {
-	const {tagList, title, caption, author_id, author_nm, regdate, file_nm} = data
+	const {id, tagList, title, caption, author_id, author_nm, regdate, file_nm} = data
 	const src = `/res/image/${author_id}/${file_nm}`
 	
 	const article = document.querySelector('.article')
@@ -43,7 +37,7 @@ export function setArticle(data) {
 				el.alt = title
 				break
 			case 'btn_container' :
-				setBtn(el, src, file_nm)
+				setBtn(el, id, src, file_nm)
 				break
 			default: break
 		}
@@ -66,19 +60,48 @@ function setTagList(el, tagList) {
 	})
 }
 
-function setBtn(el, src, file_nm) {
-	unsetList(el)
+function setBtn(el, id, src, file_nm) {
+	const download_btn = el.querySelector('.download_btn')
+	const a = download_btn.querySelector('a')
+	a.href = src
+	a.download = file_nm
 	
-	const download_btn = createEl('button', 'download_btn')
-	const link = createEl('a', '')
-	link.href = src
-	link.download = file_nm
-	link.append(createIconEl('download'))
-	download_btn.append(link)
+	const share_btn = el.querySelector('.share_btn')
+	const tooltip = share_btn.querySelector('#tooltip')
+	const current_message = tooltip.innerText
 	
-	const share_btn = createEl('button', 'share_btn')
-	share_btn.append(createIconEl('share'))
-	
-	el.appendChild(download_btn)
-	el.appendChild(share_btn)
+	share_btn.addEventListener('click', () => copyLink(id, tooltip))
+	share_btn.addEventListener('mouseout', () => resetTooltip(tooltip, current_message))
+//	share_btn.onmouseout = resetTooltip(tooltip, current_message)x
+
+	const fullscreen_btn = el.querySelector('.fullscreen_btn')
+	if(location.pathname == '/article/detail') {
+		el.removeChild(fullscreen_btn)
+	} else {
+		fullscreen_btn.addEventListener('click', () => {
+			location.href = `/article/detail?id=${id}`
+		})
+	}
 }
+
+function copyLink(id, tooltip) {
+	const origin = location.origin
+	navigator.clipboard.writeText(`${origin}/article/detail?id=${id}`)
+	
+	console.log(tooltip)
+	tooltip.innerText = 'Copied !!'
+}
+
+function resetTooltip(tooltip, message) {
+	tooltip.innerText = message
+}
+
+
+
+
+
+
+
+
+
+

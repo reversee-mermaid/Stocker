@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 @import url("/res/css/module/thumbnail.css");
-@import url("/res/css/content/article/detail.css");
+@import url("/res/css/module/article.css");
 
 #upload_btn {
 	padding: 10px 15px;
@@ -52,4 +52,9 @@
 #modal_inner img {
     max-height: 94%;
     object-fit: contain;
+}
+
+.btn_container {
+	right: 30px;
+	top: 30px;
 }
