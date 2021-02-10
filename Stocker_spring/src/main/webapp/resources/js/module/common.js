@@ -10,12 +10,6 @@ function createEl(tagName, className) {
 	return el
 }
 
-function createIconEl(text) {
-	const span = createEl('span', 'material-icons')
-	span.innerText = text
-	return span
-}
-
 export function setArticle(data) {
 	const {id, tagList, title, caption, author_id, author_nm, regdate, file_nm} = data
 	const src = `/res/image/${author_id}/${file_nm}`
@@ -78,7 +72,16 @@ function setBtn(el, id, src, file_nm) {
 	
 	share_btn.addEventListener('click', () => copyLink(id, tooltip))
 	share_btn.addEventListener('mouseout', () => resetTooltip(tooltip, current_message))
-//	share_btn.onmouseout = resetTooltip(tooltip, current_message)
+//	share_btn.onmouseout = resetTooltip(tooltip, current_message)x
+
+	const fullscreen_btn = el.querySelector('.fullscreen_btn')
+	if(location.pathname == '/article/detail') {
+		el.removeChild(fullscreen_btn)
+	} else {
+		fullscreen_btn.addEventListener('click', () => {
+			location.href = `/article/detail?id=${id}`
+		})
+	}
 }
 
 function copyLink(id, tooltip) {

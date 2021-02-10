@@ -21,5 +21,9 @@
 				<span class="material-icons">download</span>
 			</a>
 		</button>
+		
+		<button class="fullscreen_btn">
+			<span class="material-icons">open_in_full</span>
+		</button>
 	</div>
 </article>
