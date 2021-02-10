@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.trainspotting.stocker.model.ArticleDto;
 import com.trainspotting.stocker.model.Tag;
+import com.trainspotting.stocker.model.User;
 
 @Controller
 @RequestMapping("/article")
@@ -38,15 +39,23 @@ public class ArticleController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail(ArticleDto param, Model model) {
-		model.addAttribute("article", service.detail(param));
-	}
+	public void detail(ArticleDto param, Model model) {}
 	
 	@ResponseBody
 	@GetMapping("/detail/thumb")
-	public Map<String, Object> thumb(ArticleDto param) {
+	public Map<String, Object> thumb(ArticleDto param, HttpSession session) {
+		
+		ArticleDto article = service.detail(param);
+		boolean editable = false;
+		
+		User current_user = (User) session.getAttribute("current_user");
+		if(current_user != null) {
+			editable = current_user.getId() == article.getAuthor_id();
+		}
+		
 		Map<String, Object> json = new HashMap<>();
-		json.put("article", service.detail(param));
+		json.put("article", article);
+		json.put("editable", editable);
 		
 		return json;
 	}

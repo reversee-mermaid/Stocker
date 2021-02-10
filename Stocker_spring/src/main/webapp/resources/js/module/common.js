@@ -3,105 +3,130 @@ export function setErrMessage(message) {
 	messageField.innerText = message
 }
 
-function createEl(tagName, className) {
-	const el = document.createElement(tagName)
-	el.className = className
-	
-	return el
-}
-
 export function setArticle(data) {
-	const {id, tagList, title, caption, author_id, author_nm, regdate, file_nm} = data
-	const src = `/res/image/${author_id}/${file_nm}`
-	
 	const article = document.querySelector('.article')
+
 	Array.from(article.children).forEach(el => {
-		switch(el.className) {
-			case 'tag_list' : 
-				setTagList(el, tagList)
-				break
-			case 'article_title' : 
-				el.innerText = `Title: ${title}`
-				break
-			case 'article_caption' : 
-				el.innerText = caption != '' ? `Caption: ${caption}` : ''
-				break
-			case 'article_author' : 
-				el.innerText = `Author: @${author_nm}`
-				break
-			case 'article_regdate' :
-				el.innerText = regdate
-				break
-			case 'article_img' : 
-				el.src = src
-				el.alt = title
-				break
-			case 'btn_container' :
-				setBtn(el, id, src, file_nm)
-				break
-			default: break
+		switch (el.className) {
+			case 'tag_list':
+				unsetList(el)
+				setTagList(el)
+				break;
+
+			case 'article_title':
+				el.innerText = `Title: ${data.title}`
+				break;
+
+			case 'article_caption':
+				el.innerText = data.caption ? `Caption: ${data.caption}` : ''
+				break;
+
+			case 'article_author':
+				el.innerText = `Author: @${data.author_nm}`
+				break;
+
+			case 'article_regdate':
+				el.innerText = data.regdate
+				break;
+
+			case 'article_img':
+				el.alt = data.title
+				el.src = `/res/image/${data.author_id}/${data.file_nm}`
+				break;
+
+			default:
+				break;
 		}
 	})
-}
 
-function unsetList(el) {
-	while(el.hasChildNodes()) {
-		el.removeChild(el.childNodes[0])
+	function unsetList(el) {
+		while (el.hasChildNodes()) {
+			el.removeChild(el.childNodes[0])
+		}
 	}
-}
 
-function setTagList(el, tagList) {
-	unsetList(el)
-	
-	tagList.forEach(tag => {
-		const li = createEl('li', 'tag')
-		li.innerText = tag.nm
-		el.appendChild(li)
-	})
-}
-
-function setBtn(el, id, src, file_nm) {
-	const download_btn = el.querySelector('.download_btn')
-	const a = download_btn.querySelector('a')
-	a.href = src
-	a.download = file_nm
-	
-	const share_btn = el.querySelector('.share_btn')
-	const tooltip = share_btn.querySelector('#tooltip')
-	const current_message = tooltip.innerText
-	
-	share_btn.addEventListener('click', () => copyLink(id, tooltip))
-	share_btn.addEventListener('mouseout', () => resetTooltip(tooltip, current_message))
-//	share_btn.onmouseout = resetTooltip(tooltip, current_message)x
-
-	const fullscreen_btn = el.querySelector('.fullscreen_btn')
-	if(location.pathname == '/article/detail') {
-		el.removeChild(fullscreen_btn)
-	} else {
-		fullscreen_btn.addEventListener('click', () => {
-			location.href = `/article/detail?id=${id}`
+	function setTagList(el) {
+		data.tagList.forEach(tag => {
+			const li = document.createElement('li')
+			li.className = 'tag'
+			li.innerText = tag.nm
+			el.appendChild(li)
 		})
 	}
 }
 
-function copyLink(id, tooltip) {
-	const origin = location.origin
-	navigator.clipboard.writeText(`${origin}/article/detail?id=${id}`)
+export function setBtns(data, editable) {
+	setCommonsBtns(data)
+	setControllBtns(data.id, editable)
+}
+
+function setCommonsBtns(data) {
+	const container = document.querySelector('.btn_container .commons')
+	Array.from(container.children).forEach(btn => {
+		switch (btn.className) {
+			case 'download_btn':
+				setDownloadBtn(btn)
+				break;
+
+			case 'share_btn':
+				setShareBtn(btn)
+				break;
+
+			case 'fullscreen_btn':
+				if (location.pathname == '/article/detail') {
+					container.removeChild(btn)
+				} else {
+					setFullscreenBtn(btn)
+				}
+				break;
+
+			default:
+				break;
+		}
+	})
 	
-	console.log(tooltip)
-	tooltip.innerText = 'Copied !!'
+	function setDownloadBtn(btn) {
+		const a = btn.querySelector('a')
+		a.href = `/res/image/${data.author_id}/${data.file_nm}`
+		a.download = data.file_nm
+	}
+
+	function setShareBtn(btn) {
+		const tooltip = btn.querySelector('.tooltip')
+		const current_message = tooltip.innerText
+
+		btn.onclick = () => {
+			console.log('copied')
+			const text = `${location.origin}/article/detail?id=${data.id}`
+			navigator.clipboard.writeText(text)
+			tooltip.innerText = 'Copied !!'
+		}
+
+		btn.onmouseout = () => {
+			tooltip.innerText = current_message
+		}
+	}
+
+	function setFullscreenBtn(btn) {
+		btn.onclick = () => {
+			location.href = `/article/detail?id=${data.id}`
+		}
+	}
 }
 
-function resetTooltip(tooltip, message) {
-	tooltip.innerText = message
+function setControllBtns(id, editable) {
+	const container = document.querySelector('.btn_container .controll')
+	
+	Array.from(container.children).forEach(btn => {
+
+		if (!editable) {
+			btn.onclick = null
+			container.classList.add('hide')
+
+		} else {
+			const target = btn.className.replace('_btn', '')
+			btn.onclick = () => { location.href = `/article/${target}?id=${id}` }
+			container.classList.remove('hide')
+		}
+	})
 }
-
-
-
-
-
-
-
-
-
-
