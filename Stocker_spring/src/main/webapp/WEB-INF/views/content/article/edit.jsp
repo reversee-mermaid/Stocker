@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <tiles:importAttribute name="tagList"/>
-<section id="upload" class="content">
-	<h2 class="content_title">Upload</h2>
+<section id="edit" class="content">
+	<h2 class="content_title">Edit</h2>
 	<p class="err_message"></p>
 	
 	<div>
@@ -24,12 +24,11 @@
 			
 			<input type="file" name="file" accept=".png, .jpg, .jpeg" required>
 			
-			<input type="button" value="Upload" id="upload_btn">
+			<input type="button" value="Edit" id="edit_btn">
 		</form>
 	
 		<div id="preview"></div>
 	</div>
 </section>
 
-<script type="module" src="/res/js/upload.js"></script>
-<script type="module" src="/res/js/preview.js"></script>
+<script type="module" src="/res/js/edit.js"></script>

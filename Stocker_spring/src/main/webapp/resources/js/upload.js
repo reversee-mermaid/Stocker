@@ -5,15 +5,6 @@ import { getResponseJSON, getRequestInit } from '/res/js/module/request.js'
 
 const { title, caption, tags, file } = form
 
-tags.forEach(tag => {
-	tag.addEventListener('change', toggleLabelHighlight)
-})
-
-function toggleLabelHighlight() {
-	const label = this.labels[0]
-	label.classList.toggle('checked')
-}
-
 upload_btn.addEventListener('click', async function() {
 	setErrMessage('')
 	
