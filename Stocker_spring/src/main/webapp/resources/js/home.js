@@ -1,4 +1,4 @@
-import { setArticle } from '/res/js/module/common.js'
+import { setArticle, setBtns } from '/res/js/module/common.js'
 
 const article = document.querySelector('#modal .article')
 article.id = 'modal_inner'
@@ -15,9 +15,10 @@ const thumbList = document.querySelectorAll('.thumb')
 thumbList.forEach(thumb => {
 	thumb.addEventListener('click', async function() {
 		const {id} = this.dataset
-		const data = await getResponseJSON(id).then(({article}) => article)
+		const {article, editable} = await getResponseJSON(id).then(json => json)
 		
-		setArticle(data)
+		setArticle(article)
+		setBtns(article, editable)
 		toggleModal()
 	})
 })

@@ -1,4 +1,4 @@
-import { setArticle } from '/res/js/module/common.js'
+import { setArticle, setBtns } from '/res/js/module/common.js'
 
 function getId() {
 	const url = new URL(location.href)
@@ -12,9 +12,10 @@ async function getResponseJSON(id) {
 
 async function init() {
 	const id = getId()
-	const data = await getResponseJSON(id).then(({article}) => article)
+	const {article, editable} = await getResponseJSON(id).then(json => json)
 	
-	setArticle(data)
+	setArticle(article)
+	setBtns(article, editable)
 }
 
 init()

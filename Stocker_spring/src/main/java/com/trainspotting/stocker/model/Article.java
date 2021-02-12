@@ -7,11 +7,12 @@ public class Article {
 	private String caption;
 	private String file_nm;
 	private String regdate;
+	private int archive;
 	
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", author_id=" + author_id + ", title=" + title + ", caption=" + caption
-				+ ", file_nm=" + file_nm + ", regdate=" + regdate + "]";
+				+ ", file_nm=" + file_nm + ", regdate=" + regdate + ", archive=" + archive + "]";
 	}
 	
 	public int getId() {
@@ -49,5 +50,11 @@ public class Article {
 	}
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+	public int getArchive() {
+		return archive;
+	}
+	public void setArchive(int archive) {
+		this.archive = archive;
 	}
 }

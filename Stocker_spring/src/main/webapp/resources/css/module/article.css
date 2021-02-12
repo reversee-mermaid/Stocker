@@ -32,9 +32,18 @@
 	position: absolute;
 	top: 0;
 	right: 0;
+	text-align: right;
 }
 
-.btn_container > button {
+.btn_container .commons {
+	margin-bottom: 10px;
+}
+
+.btn_container .controll.hide {
+	display: none;
+}
+
+.btn_container button {
 	position: relative;
 	width: 32px;
 	height: 32px;
@@ -46,19 +55,19 @@
 	transition: background .2s;
 }
 
-.btn_container > button .material-icons {
+.btn_container button .material-icons {
 	vertical-align: middle;
 }
 
-.btn_container > button:hover {
+.btn_container .commons button:hover {
 	background: #ea5455;
 }
 
-.share_btn:hover #tooltip {
+.share_btn:hover .tooltip {
 	display: block;
 }
 
-#tooltip {
+.tooltip {
 	display: none;
 	position: absolute;
   top: 120%;
@@ -68,5 +77,14 @@
 	border-radius: 30px;
   background: #eee;
   color: #666;
+  z-index: 1;
   transform: translateX(-50%);
+}
+
+.btn_container .edit_btn {
+	background: #FFBF64;
+}
+
+.btn_container .delete_btn {
+	background: #BE424A;
 }

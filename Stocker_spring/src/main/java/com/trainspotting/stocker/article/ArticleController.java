@@ -9,11 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.trainspotting.stocker.model.ArticleDto;
 import com.trainspotting.stocker.model.Tag;
+import com.trainspotting.stocker.model.User;
 
 @Controller
 @RequestMapping("/article")
@@ -38,15 +39,23 @@ public class ArticleController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail(ArticleDto param, Model model) {
-		model.addAttribute("article", service.detail(param));
-	}
+	public void detail(RedirectAttributes attr, ArticleDto param) {}
 	
 	@ResponseBody
 	@GetMapping("/detail/thumb")
-	public Map<String, Object> thumb(ArticleDto param) {
+	public Map<String, Object> thumb(ArticleDto param, HttpSession session) {
+		
+		ArticleDto article = service.detail(param);
+		boolean editable = false;
+		
+		User current_user = (User) session.getAttribute("current_user");
+		if(current_user != null) {
+			editable = current_user.getId() == article.getAuthor_id();
+		}
+		
 		Map<String, Object> json = new HashMap<>();
-		json.put("article", service.detail(param));
+		json.put("article", article);
+		json.put("editable", editable);
 		
 		return json;
 	}
@@ -59,5 +68,17 @@ public class ArticleController {
 			list.add(tag);
 		}
 		return list;
+	}
+	
+	@GetMapping("/delete")
+	public String delete(RedirectAttributes attr, ArticleDto param, HttpSession session) {
+		int result = service.archive(param, session);
+		System.out.println(param);
+		if(result == 1) {
+			return "redirect:/home";
+		} else {
+			attr.addFlashAttribute("err_message", "A server has error occurred..!");
+			return "redirect:/article/detail?id=" + param.getId();
+		}
 	}
 }

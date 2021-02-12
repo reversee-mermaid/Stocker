@@ -41,6 +41,7 @@
 	<select id="selectArticleAll" resultType="ArticleDto">
 		SELECT 
 			<include refid="article"/>
+		WHERE a.archive = 0
 		ORDER BY a.id DESC
 	</select>
 	
@@ -51,4 +52,10 @@
 		JOIN t_user AS u
 		ON a.author_id = u.id
 	</sql>
+	
+	<update id="archiveArticle">
+		UPDATE t_article
+		SET archive = !archive
+		WHERE id = #{id}
+	</update>
 </mapper>
