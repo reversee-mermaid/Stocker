@@ -26,7 +26,7 @@ fileField.addEventListener('change', function() {
 	setPreview(file)
 })
 
-function setPreview(file) {
+export function setPreview(file) {
 	let img = preview.querySelector('img')
 	
 	if (!img) {
@@ -34,7 +34,11 @@ function setPreview(file) {
 		preview.appendChild(img)
 	}
 	
-	img.src = URL.createObjectURL(file)
+	if(file.constructor == File) {
+		img.src = URL.createObjectURL(file)	
+	} else {
+		img.src = file
+	}
 }
 
 function removePreview() {

@@ -49,7 +49,7 @@
 	<!-- hikariCP -->
 	<beans:bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<beans:property name="jdbcUrl" value="jdbc:mysql://localhost/stocker?serverTimezone=UTC" />
+		<beans:property name="jdbcUrl" value="jdbc:mysql://localhost/stocker?serverTimezone=UTC&amp;allowMultiQueries=true" />
 		<beans:property name="username" value="root" />
 		<beans:property name="password" value="root" />
 	</beans:bean>	

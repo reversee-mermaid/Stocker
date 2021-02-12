@@ -45,29 +45,18 @@ public class ArticleService {
 	};
 
 	public ArticleDto detail(ArticleDto param) {
-		
-		try {
-			return mapper.selectArticle(param);
-		} catch (Exception e) {}
-		
-		return null;
+		return mapper.selectArticle(param);
 	}
 	
 	public List<ArticleDto> selectList() {
-		
 		return mapper.selectArticleAll();
 	}
 	
 	public int archive(ArticleDto param, HttpSession session) {
-		User current_user = (User) session.getAttribute("current_user");
-		if(current_user != null) {
-			try {
-				mapper.archiveArticle(param);
-				return 1;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return 0;
+		return mapper.archiveArticle(param);
+	}
+	
+	public int edit(ArticleDto param, HttpSession session) {
+		return mapper.updateArticle(param);
 	}
 }
