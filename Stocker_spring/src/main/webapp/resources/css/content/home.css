@@ -3,6 +3,28 @@
 @import url("/res/css/module/thumbnail.css");
 @import url("/res/css/module/article.css");
 
+.options {
+	text-align: center;
+}
+
+.filter_list .filter {
+	display: inline-block;
+	margin-bottom: 10px;
+	border: 1px solid;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+.filter_list .filter a {
+	display: block;
+	padding: 10px 15px;
+}
+
+.filter_list .filter.act {
+	color: #fff;
+	background: #2d4059;
+}
+
 #upload_btn {
 	padding: 10px 15px;
 	border-radius: 20px;

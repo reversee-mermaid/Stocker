@@ -48,8 +48,8 @@ public class ArticleService {
 		return mapper.selectArticle(param);
 	}
 	
-	public List<ArticleDto> selectList() {
-		return mapper.selectArticleAll();
+	public List<ArticleDto> selectList(Tag filter) {
+		return mapper.selectArticleAll(filter);
 	}
 	
 	public int archive(ArticleDto param, HttpSession session) {
