@@ -125,7 +125,11 @@ function setControllBtns(id, editable) {
 
 		} else {
 			const target = btn.className.replace('_btn', '')
-			btn.onclick = () => { location.href = `/article/${target}?id=${id}` }
+			btn.onclick = () => { 
+				if(confirm('Are you sure ??')) {
+					location.href = `/article/${target}?id=${id}`
+				}
+			 }
 			container.classList.remove('hide')
 		}
 	})

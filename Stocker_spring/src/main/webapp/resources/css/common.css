@@ -50,3 +50,8 @@ header .gnb_user li:hover {
 .content_title {
 	margin-bottom: 20px;
 }
+
+.err_message {
+	margin-bottom: 20px;
+	color: red;
+}

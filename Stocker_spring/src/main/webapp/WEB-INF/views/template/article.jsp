@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <article class="article">
+	<p class="err_message">${err_message}</p>
 	<ul class="tag_list"></ul>
 	
 	<h2 class="article_title"></h2>

@@ -4,11 +4,6 @@
 	text-align: center;
 }
 
-.err_message {
-	margin-bottom: 20px;
-	color: red;
-}
-
 #form {
 	display: flex;
 	flex-direction: column;

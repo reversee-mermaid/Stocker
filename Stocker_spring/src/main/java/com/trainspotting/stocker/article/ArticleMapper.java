@@ -13,4 +13,5 @@ public interface ArticleMapper {
 	int insertArticleTag(ArticleDto param);
 	ArticleDto selectArticle(ArticleDto param);
 	List<ArticleDto> selectArticleAll();
+	int archiveArticle(ArticleDto param);
 }

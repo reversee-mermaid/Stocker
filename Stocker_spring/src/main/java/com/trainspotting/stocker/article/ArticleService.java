@@ -57,4 +57,17 @@ public class ArticleService {
 		
 		return mapper.selectArticleAll();
 	}
+	
+	public int archive(ArticleDto param, HttpSession session) {
+		User current_user = (User) session.getAttribute("current_user");
+		if(current_user != null) {
+			try {
+				mapper.archiveArticle(param);
+				return 1;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
 }
