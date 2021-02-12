@@ -1,16 +1,17 @@
-import { setErrMessage } from '/res/js/module/common.js'
+import { getParam, setErrMessage } from '/res/js/module/common.js'
 import { checkValidityAll } from '/res/js/module/form.js'
 import { setPreloader, unsetPreloader } from '/res/js/module/preloader.js'
 import { getResponseJSON, getRequestInit } from '/res/js/module/request.js'
+import { setPreview } from '/res/js/preview.js'
 
 const { title, caption, tags, file } = form
 
-upload_btn.addEventListener('click', async function() {
+edit_btn.addEventListener('click', async function() {
 	setErrMessage('')
 	
 	let valid
 	
-	valid = checkValidityAll([title, caption, file])
+	valid = checkValidityAll([title, caption])
 	if(!valid) return
 	
 	valid = checkValidityForTags(tags)
@@ -28,7 +29,8 @@ upload_btn.addEventListener('click', async function() {
 
 async function submit() {
 		const formData = new FormData(form)
-		return getResponseJSON('/article/upload', getRequestInit(formData))
+		formData.set('id', getParam('id'))
+		return getResponseJSON('/article/edit', getRequestInit(formData))
 }
 
 function process(code) {
@@ -53,3 +55,23 @@ function checkValidityForTags(checkboxList) {
 	
 	return true
 }
+
+async function init() {
+	const id = getParam('id')
+	const uri = `/article/detail/thumb?id=${id}`
+	const {article} = await getResponseJSON(uri, null).then(json => json)
+	
+	title.value = article.title
+	caption.value = article.caption ? article.caption : null
+	
+	article.tagList.forEach(tag => {
+		tags[tag.id - 1].checked = true
+	})
+	
+	form.removeChild(file)
+	
+	const filePath = `/res/image/${article.author_id}/${article.file_nm}`
+	setPreview(filePath)
+}
+
+init()

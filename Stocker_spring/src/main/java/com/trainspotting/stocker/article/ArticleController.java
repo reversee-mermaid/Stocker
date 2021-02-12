@@ -73,12 +73,26 @@ public class ArticleController {
 	@GetMapping("/delete")
 	public String delete(RedirectAttributes attr, ArticleDto param, HttpSession session) {
 		int result = service.archive(param, session);
-		System.out.println(param);
 		if(result == 1) {
 			return "redirect:/home";
 		} else {
 			attr.addFlashAttribute("err_message", "A server has error occurred..!");
 			return "redirect:/article/detail?id=" + param.getId();
 		}
+	}
+	
+	@GetMapping("/edit")
+	public void edit() {}
+	
+	@ResponseBody
+	@PostMapping("/edit")
+	public Map<String, Object> edit(@RequestParam int[] tags, ArticleDto param, HttpSession session) {
+		Map<String, Object> json = new HashMap<>();
+		
+		param.setTagList(generateTagList(tags));
+		json.put("code", service.edit(param, session));
+		json.put("id", param.getId());
+		
+		return json;
 	}
 }

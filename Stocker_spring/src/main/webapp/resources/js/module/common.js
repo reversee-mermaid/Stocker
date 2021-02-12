@@ -1,3 +1,9 @@
+export function getParam(name) {
+	const url = new URL(location.href)
+	const params = new URLSearchParams(url.search)
+	return parseInt(params.get(name))
+}
+
 export function setErrMessage(message) {
 	const messageField = document.querySelector('.err_message')
 	messageField.innerText = message
@@ -124,12 +130,24 @@ function setControllBtns(id, editable) {
 			container.classList.add('hide')
 
 		} else {
-			const target = btn.className.replace('_btn', '')
-			btn.onclick = () => { 
-				if(confirm('Are you sure ??')) {
-					location.href = `/article/${target}?id=${id}`
-				}
-			 }
+			switch(btn.className) {
+				case 'delete_btn':
+					btn.onclick = () => {
+						if(confirm('Are you sure ??')) {
+							location.href = `/article/delete?id=${id}`
+						}
+					}
+					break
+					
+				case 'edit_btn':
+					btn.onclick = () => {
+						location.href = `/article/edit?id=${id}`
+					}
+					break
+					
+				default:
+					break
+			}
 			container.classList.remove('hide')
 		}
 	})

@@ -58,4 +58,20 @@
 		SET archive = !archive
 		WHERE id = #{id}
 	</update>
+	
+	<update id="updateArticle">
+		UPDATE t_article
+		SET title = #{title}, caption = #{caption}
+		WHERE id = #{id};
+		
+		DELETE FROM t_article_tag
+		WHERE article_id = #{id};
+		
+		INSERT INTO t_article_tag 
+		(article_id, tag_id)
+		VALUES
+		<foreach collection="tagList" item="tag" separator=", " close=";">
+			(#{id}, ${tag.id})
+		</foreach>
+	</update>
 </mapper>
