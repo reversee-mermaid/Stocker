@@ -1,5 +1,9 @@
 import { setArticle, setBtns } from '/res/js/module/common.js'
 
+const slug = location.pathname.split('/').pop()
+const currentFilter = document.querySelector(`.filter[data-slug="${slug}"]`)
+currentFilter.classList.add('act')
+
 const article = document.querySelector('#modal .article')
 article.id = 'modal_inner'
 

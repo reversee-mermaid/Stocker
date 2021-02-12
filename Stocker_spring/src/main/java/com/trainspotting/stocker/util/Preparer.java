@@ -20,7 +20,7 @@ public class Preparer implements ViewPreparer {
 	
 	private List<Tag> tagList;
 	
-	private List<Tag> getTagList() {
+	public List<Tag> getTagList() {
 		if(tagList == null) {
 			tagList = tagMapper.selectAll();
 		}

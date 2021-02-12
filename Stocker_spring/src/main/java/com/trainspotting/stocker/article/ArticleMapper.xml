@@ -41,7 +41,14 @@
 	<select id="selectArticleAll" resultType="ArticleDto">
 		SELECT 
 			<include refid="article"/>
+		<if test="id != 0">
+			JOIN t_article_tag AS t
+			ON a.id = t.article_id
+		</if>
 		WHERE a.archive = 0
+		<if test="id != 0">
+			AND t.tag_id = #{id}
+		</if>
 		ORDER BY a.id DESC
 	</select>
 	
