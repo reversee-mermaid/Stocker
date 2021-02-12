@@ -1,3 +1,9 @@
+export function getParam(name) {
+	const url = new URL(location.href)
+	const params = new URLSearchParams(url.search)
+	return parseInt(params.get(name))
+}
+
 export function setErrMessage(message) {
 	const messageField = document.querySelector('.err_message')
 	messageField.innerText = message

@@ -1,6 +1,7 @@
 import { setErrMessage } from '/res/js/module/common.js'
 import { checkValidityAll } from '/res/js/module/form.js'
 import { setPreloader, unsetPreloader } from '/res/js/module/preloader.js'
+import { getResponseJSON, getRequestInit } from '/res/js/module/request.js'
 
 const { title, caption, tags, file } = form
 
@@ -24,7 +25,9 @@ upload_btn.addEventListener('click', async function() {
 	valid = checkValidityForTags(tags)
 	if(!valid) return
 	
+	setPreloader()
 	const { id, code } = await submit().then(json => json)
+	unsetPreloader()
 	
 	valid = process(code)
 	if(!valid) return
@@ -34,22 +37,7 @@ upload_btn.addEventListener('click', async function() {
 
 async function submit() {
 		const formData = new FormData(form)
-		
-		const param = new FormData()
-		param.append('title', title.value)
-		param.append('caption', caption.value)
-		param.append('file', file.files[0])
-		param.append('tagList', formData.getAll('tags').map(tag_pk => parseInt(tag_pk)))
-		
-		setPreloader()
-		
-		return fetch('/article/upload', {
-        method: 'POST',
-        body: formData
-    }).then(res => {
-			unsetPreloader()
-			return res.json()
-		})
+		return getResponseJSON('/article/upload', getRequestInit(formData))
 }
 
 function process(code) {
