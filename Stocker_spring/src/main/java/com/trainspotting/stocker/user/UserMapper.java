@@ -12,4 +12,5 @@ public interface UserMapper {
 	int insert(User param);
 	User select(User param);
 	List<ArticleDto> selectArticleAll(User param);
+	int update(User param);
 }

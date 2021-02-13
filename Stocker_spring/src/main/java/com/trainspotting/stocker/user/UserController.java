@@ -59,4 +59,15 @@ public class UserController {
 		List<ArticleDto> list = service.selectList(session);
 		model.addAttribute("list", list);
 	}
+
+	@GetMapping("/profile")
+	public void profile() {}
+	
+	@ResponseBody
+	@PostMapping("/update")
+	public Map<String, Object> update(@RequestBody User param, HttpSession session) {
+		Map<String, Object> json = new HashMap<>();
+		json.put("code", service.update(param, session));
+		return json;
+	}
 }

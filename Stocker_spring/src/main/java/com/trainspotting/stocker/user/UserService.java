@@ -53,4 +53,15 @@ public class UserService {
 		User current_user = (User) session.getAttribute("current_user");
 		return mapper.selectArticleAll(current_user);
 	}
+	
+	public int update(User param, HttpSession session) {
+		User current_user = (User) session.getAttribute("current_user");
+		param.setId(current_user.getId());
+		
+		if(mapper.update(param) == 1) {
+			current_user.setNm(param.getNm());
+			return 1;
+		}
+		return 0;
+	}
 }

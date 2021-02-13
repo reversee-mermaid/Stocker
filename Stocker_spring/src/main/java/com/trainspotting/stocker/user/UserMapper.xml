@@ -14,4 +14,10 @@
 		SELECT id, title, file_nm, author_id FROM t_article
 		WHERE author_id = #{id} AND archive = 0
 	</select>
+	
+	<update id="update">
+		UPDATE t_user
+		SET nm = #{nm}
+		WHERE id = #{id}
+	</update>
 </mapper>
