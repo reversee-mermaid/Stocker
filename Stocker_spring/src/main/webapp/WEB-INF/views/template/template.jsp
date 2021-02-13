@@ -42,7 +42,7 @@
 							<li><a href="/user/signup">Sign up</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a>@${sessionScope.current_user.nm}</a></li>
+							<li><a href="/user/gallery">@${sessionScope.current_user.nm}</a></li>
 							<li><a href="/user/logout">Logout</a></li>
 						</c:otherwise>
 					</c:choose>
