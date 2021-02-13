@@ -1,18 +1,22 @@
 package com.trainspotting.stocker.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.trainspotting.stocker.article.ArticleMapper;
+import com.trainspotting.stocker.model.ArticleDto;
 import com.trainspotting.stocker.model.User;
 
 @Controller
@@ -21,7 +25,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
-
+	
 	@GetMapping("/signup")
 	public void signup() {}
 	
@@ -48,5 +52,22 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home";
+	}
+	
+	@GetMapping("/gallery")
+	public void gallery(Model model, HttpSession session) {
+		List<ArticleDto> list = service.selectList(session);
+		model.addAttribute("list", list);
+	}
+
+	@GetMapping("/profile")
+	public void profile() {}
+	
+	@ResponseBody
+	@PostMapping("/update")
+	public Map<String, Object> update(@RequestBody User param, HttpSession session) {
+		Map<String, Object> json = new HashMap<>();
+		json.put("code", service.update(param, session));
+		return json;
 	}
 }
