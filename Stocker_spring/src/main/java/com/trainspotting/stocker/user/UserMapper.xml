@@ -9,4 +9,9 @@
 	<select id="select" resultType="User">
 		select * from t_user where email = #{email}
 	</select>
+	
+	<select id="selectArticleAll" resultType="ArticleDto">
+		SELECT id, title, file_nm, author_id FROM t_article
+		WHERE author_id = #{id} AND archive = 0
+	</select>
 </mapper>

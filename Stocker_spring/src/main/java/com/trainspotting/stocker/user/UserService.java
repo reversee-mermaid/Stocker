@@ -1,10 +1,13 @@
 package com.trainspotting.stocker.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.trainspotting.stocker.model.ArticleDto;
 import com.trainspotting.stocker.model.User;
 import com.trainspotting.stocker.util.SecurityUtil;
 
@@ -44,5 +47,10 @@ public class UserService {
 		session.setAttribute("current_user", data);
 		
 		return 1;
+	}
+	
+	public List<ArticleDto> selectList(HttpSession session) {
+		User current_user = (User) session.getAttribute("current_user");
+		return mapper.selectArticleAll(current_user);
 	}
 }
