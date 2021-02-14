@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section id="profile" class="content">
 	<nav class="lnb">
     <a href="/user/gallery">&gt;My gallery</a>
@@ -10,7 +11,11 @@
 
 	<form id="form">
 		<div class="image_container">
-			<div id="preview" class="image_view"></div>
+			<div id="preview" class="image_view">
+				<c:if test="${current_user.profile != null}">
+					<img src="/res/image/${current_user.id}/${current_user.profile}">
+				</c:if>
+			</div>
 			<label for="file"><span class="material-icons">edit</span></label>
 			<input type="file" name="file" id="file" accept="image/*">
 		</div>

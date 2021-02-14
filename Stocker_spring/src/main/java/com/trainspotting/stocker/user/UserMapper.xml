@@ -6,7 +6,7 @@
 		values (#{email}, #{nm}, #{pw})
 	</insert>
 	
-	<select id="select" resultType="User">
+	<select id="select" resultType="UserDto">
 		select * from t_user where email = #{email}
 	</select>
 	
