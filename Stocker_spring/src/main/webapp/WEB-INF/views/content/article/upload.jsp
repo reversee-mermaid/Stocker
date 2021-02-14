@@ -32,4 +32,3 @@
 </section>
 
 <script type="module" src="/res/js/upload.js"></script>
-<script type="module" src="/res/js/preview.js"></script>

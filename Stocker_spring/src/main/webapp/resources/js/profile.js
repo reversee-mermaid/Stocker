@@ -1,35 +1,28 @@
 import { setErrMessage } from '/res/js/module/common.js'
 import { getResponseJSON, getRequestInit } from '/res/js/module/request.js'
 
-const { file, nm } = form
+const { nm } = form
 
 update_btn.addEventListener('click', async function() {
 	let valid
 	
-	valid = nm.value || file.value
+	valid = nm.value
 	if(!valid) {
 		location.reload()
 		return
 	}
 
-	valid = await submit().then(({code}) => process(code))
+	valid = await submitInfo().then(({code}) => process(code))
 	if(!valid) return
 
 	location.reload()
 })
 
-function submit() {
-	let formData = new FormData()
-
-	if(nm.value) {
-		formData.append('nm', nm.value)
+function submitInfo() {
+	const param = {
+		nm: nm.value
 	}
-
-	if(file.value) {
-		formData.append('file', file.files[0])
-	}
-
-	return getResponseJSON('/user/profile', getRequestInit(formData))
+	return getResponseJSON('/user/profile', getRequestInit(param))
 }
 
 function process(code) {

@@ -34,4 +34,4 @@
 </section>
 
 <script type="module" src="/res/js/profile.js"></script>
-<script type="module" src="/res/js/preview.js"></script>
+<script type="module" src="/res/js/profile-image.js"></script>
