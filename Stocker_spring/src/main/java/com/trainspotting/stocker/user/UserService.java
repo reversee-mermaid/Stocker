@@ -1,14 +1,11 @@
 package com.trainspotting.stocker.user;
 
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.trainspotting.stocker.model.ArticleDto;
 import com.trainspotting.stocker.model.User;
@@ -66,19 +63,28 @@ public class UserService {
 		return mapper.selectArticleAll(current_user);
 	}
 	
+	public int update(User param, HttpSession session) {
+		try {
+			User current_user = (User) session.getAttribute("current_user");
+			param.setId(current_user.getId());
+			
+			if(param.getNm() != null && !param.getNm().equals(current_user.getNm())) {
+				int result = mapper.update(param);
+				if(result == 1) {
+					current_user.setNm(param.getNm());
+				}
+			}
+			return 1;
+		} catch (Exception e) {}
+		
+		return 0;
+	}
+	
 	public int update(UserDto param, HttpSession session) {
 		try {
 			UserDto current_user = (UserDto) session.getAttribute("current_user");
-			if(current_user == null) return -1;
 			
-			param.setId(current_user.getId());
-
-			if(param.getNm() != null && !param.getNm().equals(current_user.getNm())) {
-				if(mapper.update(param) != 1) return 0;
-				current_user.setNm(param.getNm());
-			}
-			
-			String savePath = util.getSavePath(session, param.getId());
+			String savePath = util.getSavePath(session, current_user.getId());
 			
 			if(param.getFile() != null) {
 				String extension = util.getExtension(param.getFile().getOriginalFilename());
@@ -90,7 +96,6 @@ public class UserService {
 				util.deleteProfile(savePath);
 				current_user.setProfile(null);
 			}
-			
 			return 1;
 		} catch (Exception e) {}
 		

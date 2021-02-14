@@ -2,6 +2,7 @@ import { setErrMessage } from '/res/js/module/common.js'
 import { checkValidityAll } from '/res/js/module/form.js'
 import { setPreloader, unsetPreloader } from '/res/js/module/preloader.js'
 import { getResponseJSON, getRequestInit } from '/res/js/module/request.js'
+import { isImageFile, setPreview, removePreview } from '/res/js/module/file.js'
 
 const { title, caption, tags, file } = form
 
@@ -53,3 +54,26 @@ function checkValidityForTags(checkboxList) {
 	
 	return true
 }
+
+file.addEventListener('click', () => setErrMessage(''))
+file.addEventListener('change', function() {
+	let valid
+	
+	valid = this.value
+	if(!valid) {
+		removePreview(preview)
+		return
+	}
+	
+	const _file = this.files[0]
+	valid = isImageFile(_file)
+	if(!valid) {
+		removePreview(preview)
+		this.focus()
+		this.value = null
+		setErrMessage('The file is unsupported or invalid format !!')
+		return
+	}
+	
+	setPreview(preview, _file)
+})
