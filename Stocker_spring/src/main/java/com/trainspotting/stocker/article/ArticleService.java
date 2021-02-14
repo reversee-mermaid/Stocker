@@ -27,7 +27,7 @@ public class ArticleService {
 			// file upload
 			String savePath = util.getSavePath(session, current_user.getId());
 			String fileName = util.generateFileName(param.getFile(), param.getTitle());
-			util.save(param.getFile(), savePath, fileName);
+			util.save(param.getFile(), savePath, fileName, true);
 
 			// insert into t_article
 			param.setAuthor_id(current_user.getId());

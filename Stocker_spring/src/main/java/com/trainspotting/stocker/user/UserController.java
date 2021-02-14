@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.trainspotting.stocker.article.ArticleMapper;
 import com.trainspotting.stocker.model.ArticleDto;
 import com.trainspotting.stocker.model.User;
+import com.trainspotting.stocker.model.UserDto;
 
 @Controller
 @RequestMapping("/user")
@@ -64,8 +66,8 @@ public class UserController {
 	public void profile() {}
 	
 	@ResponseBody
-	@PostMapping("/update")
-	public Map<String, Object> update(@RequestBody User param, HttpSession session) {
+	@PostMapping("/profile")
+	public Map<String, Object> profile(UserDto param, HttpSession session) {
 		Map<String, Object> json = new HashMap<>();
 		json.put("code", service.update(param, session));
 		return json;

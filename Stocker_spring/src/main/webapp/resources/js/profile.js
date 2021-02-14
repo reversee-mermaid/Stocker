@@ -1,36 +1,47 @@
 import { setErrMessage } from '/res/js/module/common.js'
-import { checkValidityAll } from '/res/js/module/form.js'
 import { getResponseJSON, getRequestInit } from '/res/js/module/request.js'
 
-const { nm } = form
+const { file, nm } = form
 
 update_btn.addEventListener('click', async function() {
 	let valid
 	
-	valid = checkValidityAll([nm])
-	if(!valid) return
-	
+	valid = nm.value || file.value
+	if(!valid) {
+		location.reload()
+		return
+	}
+
 	valid = await submit().then(({code}) => process(code))
 	if(!valid) return
-	
+
 	location.reload()
 })
 
-async function submit() {
-	const param = {
-		nm: nm.value
+function submit() {
+	let formData = new FormData()
+
+	if(nm.value) {
+		formData.append('nm', nm.value)
 	}
-	return getResponseJSON('/user/update', getRequestInit(param))
+
+	if(file.value) {
+		formData.append('file', file.files[0])
+	}
+
+	return getResponseJSON('/user/profile', getRequestInit(formData))
 }
 
 function process(code) {
 	let message
-	
+
 	if(code == 1) return true
 	if(code == 0) {
-		message = 'A server error has occurred ..!'
+		message = 'A server has error occurred ..!'
+	} else if(code == -1) {
+		message = 'You need to login first !!'
 	}
-	
+
 	setErrMessage(message)
 	return false
 }

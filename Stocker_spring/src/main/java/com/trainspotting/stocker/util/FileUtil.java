@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Component("FileUtil")
 public class FileUtil {
 	
-	private String getExtension(String fileName) {
+	public String getExtension(String fileName) {
 		return FilenameUtils.getExtension(fileName);
 	}
 	
@@ -32,6 +33,15 @@ public class FileUtil {
 		String path = "/resources/image/";
 		String realPath = session.getServletContext().getRealPath(path);
 		return realPath + user_id;
+	}
+	
+	private FilenameFilter getFilenameFilter(String filename) {
+		return new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.contains(filename);
+			}
+		};
 	}
 	
 	public void saveThumb(File origin_file, String savePath, int MAX) throws Exception {
@@ -59,10 +69,39 @@ public class FileUtil {
 		ImageIO.write(thumb_image, extension, thumb_file);
 	}
 	
-	public void save(MultipartFile file, String savePath, String fileName) throws Exception {
+	public void save(MultipartFile file, String savePath, String fileName, boolean createThumb) throws Exception {
 		File origin_file = new File(savePath, fileName);
 		file.transferTo(origin_file);
 		
-		saveThumb(origin_file, savePath, 600);
+		if(createThumb) {
+			saveThumb(origin_file, savePath, 600);
+		}
+	}
+	
+	public void updateProfile(MultipartFile file ,String savePath, String fileName) {
+		try {
+			deleteProfile(savePath);
+			save(file, savePath, fileName, false);
+		} catch (Exception e) {}
+	}
+
+	public void deleteProfile(String savedPath) throws Exception {
+		File file = new File(savedPath);
+		FilenameFilter filter = getFilenameFilter("profile");
+		
+		for(File f : file.listFiles(filter)) {
+			f.delete();
+		}
+	}
+	
+	public String getProfile(String savedPath) {
+		File file = new File(savedPath);
+		FilenameFilter filter = getFilenameFilter("profile");
+
+		File[] list = file.listFiles(filter);
+		if(list.length != 0) {
+			return file.listFiles(filter)[0].getName();
+		}
+		return null;
 	}
 }

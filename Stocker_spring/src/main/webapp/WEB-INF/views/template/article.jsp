@@ -28,7 +28,7 @@
 				<span class="material-icons">open_in_full</span>
 			</button>
 		</div>
-		<div class="controll">
+		<div class="control">
 			<button class="edit_btn">
 				<span class="material-icons">edit</span>
 			</button>

@@ -63,7 +63,7 @@ export function setArticle(data) {
 
 export function setBtns(data, editable) {
 	setCommonsBtns(data)
-	setControllBtns(data.id, editable)
+	setControlBtns(data.id, editable)
 }
 
 function setCommonsBtns(data) {
@@ -120,8 +120,8 @@ function setCommonsBtns(data) {
 	}
 }
 
-function setControllBtns(id, editable) {
-	const container = document.querySelector('.btn_container .controll')
+function setControlBtns(id, editable) {
+	const container = document.querySelector('.btn_container .control')
 	
 	Array.from(container.children).forEach(btn => {
 
