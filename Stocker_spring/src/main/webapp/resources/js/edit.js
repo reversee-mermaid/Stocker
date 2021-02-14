@@ -2,7 +2,7 @@ import { getParam, setErrMessage } from '/res/js/module/common.js'
 import { checkValidityAll } from '/res/js/module/form.js'
 import { setPreloader, unsetPreloader } from '/res/js/module/preloader.js'
 import { getResponseJSON, getRequestInit } from '/res/js/module/request.js'
-import { setPreview } from '/res/js/preview.js'
+import { setPreview } from '/res/js/file.js'
 
 const { title, caption, tags, file } = form
 
@@ -71,7 +71,8 @@ async function init() {
 	form.removeChild(file)
 	
 	const filePath = `/res/image/${article.author_id}/${article.file_nm}`
-	setPreview(filePath)
+	const container = document.querySelector('#preview')
+	setPreview(container, filePath)
 }
 
 init()
