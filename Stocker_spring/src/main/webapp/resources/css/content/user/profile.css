@@ -10,3 +10,43 @@
 	position: absolute;
 	right: 0;
 }
+
+.image_container {
+	position: relative;
+}
+
+#preview {
+	position: relative;
+	margin: 0 auto;
+	width: 120px;
+	height: 120px;
+	background-image: url("/res/image/profile.jpg");
+	border-radius: 60px;
+	border: none;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+	overflow: hidden;
+}
+
+.image_view img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.image_container input {
+	display: none;
+}
+
+.image_container label {
+	position: absolute;
+	bottom: 10px;
+	left: 58%;
+	border-radius: 20px;
+	background: #343434;
+	color: #fff;
+	cursor: pointer;
+}
+
+.image_container label span {
+	padding: 4px;
+}
