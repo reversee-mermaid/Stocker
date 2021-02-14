@@ -60,9 +60,14 @@ public class FileUtil {
 	}
 	
 	public void save(MultipartFile file, String savePath, String fileName) throws Exception {
+	public void save(MultipartFile file, String savePath, String fileName, boolean createThumb) throws Exception {
 		File origin_file = new File(savePath, fileName);
 		file.transferTo(origin_file);
 		
 		saveThumb(origin_file, savePath, 600);
+		if(createThumb) {
+			saveThumb(origin_file, savePath, 600);
+		}
+	}
 	}
 }
