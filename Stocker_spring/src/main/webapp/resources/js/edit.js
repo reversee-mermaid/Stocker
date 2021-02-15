@@ -2,7 +2,7 @@ import { getParam, setErrMessage } from '/res/js/module/common.js'
 import { checkValidityAll } from '/res/js/module/form.js'
 import { setPreloader, unsetPreloader } from '/res/js/module/preloader.js'
 import { getResponseJSON, getRequestInit } from '/res/js/module/request.js'
-import { setPreview } from '/res/js/file.js'
+import { setPreview } from '/res/js/module/file.js'
 
 const { title, caption, tags, file } = form
 
