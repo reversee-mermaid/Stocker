@@ -5,10 +5,11 @@ public class User {
 	private String email;
 	private String nm;
 	private String pw;
+	private String profile;
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", nm=" + nm + ", pw=" + pw + "]";
+		return "User [id=" + id + ", email=" + email + ", nm=" + nm + ", pw=" + pw + ", profile=" + profile + "]";
 	}
 
 	public int getId() {
@@ -41,5 +42,13 @@ public class User {
 
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+	
+	public String getProfile() {
+		return profile;
+	}
+	
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 }
