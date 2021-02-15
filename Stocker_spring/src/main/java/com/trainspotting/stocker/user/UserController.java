@@ -65,8 +65,7 @@ public class UserController {
 	
 	@ResponseBody
 	@PostMapping("/profile")
-	public Map<String, Object> profile(User param, HttpSession session) {
-		System.out.println("post: profile");
+	public Map<String, Object> profile(@RequestBody User param, HttpSession session) {
 		Map<String, Object> json = new HashMap<>();
 		json.put("code", service.update(param, session));
 		return json;

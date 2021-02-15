@@ -20,4 +20,17 @@
 		SET nm = #{nm}
 		WHERE id = #{id}
 	</update>
+	
+	<update id="updateProfile" parameterType="User">
+		UPDATE t_user
+	  <choose>
+	    <when test="profile != null">
+	      SET profile = #{profile}
+	    </when>
+	    <otherwise>
+	      SET profile = null
+	    </otherwise>
+	  </choose>
+		WHERE id = #{id}
+	</update>
 </mapper>

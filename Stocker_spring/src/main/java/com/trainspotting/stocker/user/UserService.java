@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.trainspotting.stocker.model.ArticleDto;
 import com.trainspotting.stocker.model.User;
@@ -40,7 +41,7 @@ public class UserService {
 	
 	public int login(User param, HttpSession session) {
 		
-		UserDto data = mapper.select(param);
+		User data = mapper.select(param);
 		
 		if(data == null) return -1;
 		
@@ -50,11 +51,7 @@ public class UserService {
 		if(!security.checkPw(plain, hashed)) return -2;
 		
 		data.setPw(null);
-		
-		String savePath = util.getSavePath(session, data.getId());
-		data.setProfile(util.getProfile(savePath));
 		session.setAttribute("current_user", data);
-		
 		return 1;
 	}
 	
@@ -75,27 +72,39 @@ public class UserService {
 				}
 			}
 			return 1;
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return 0;
 	}
 	
 	public int update(UserDto param, HttpSession session) {
+		User current_user = (User) session.getAttribute("current_user");
+		
 		try {
-			UserDto current_user = (UserDto) session.getAttribute("current_user");
-			
 			String savePath = util.getSavePath(session, current_user.getId());
-			
+
 			if(param.getFile() != null) {
-				String extension = util.getExtension(param.getFile().getOriginalFilename());
-				String fileName = String.format("%s.%s", "profile", extension);
+				MultipartFile file = param.getFile();
 				
-				util.updateProfile(param.getFile(), savePath, fileName);
-				current_user.setProfile(fileName);
+				String extension = util.getExtension(file.getOriginalFilename());
+				String filename = String.format("%s.%s", "profile", extension);
+				
+				util.updateProfile(file, savePath, filename);
+				
+				param.setProfile(filename);
+				param.setId(current_user.getId());
+				mapper.updateProfile(param);
+
+				current_user.setProfile(filename);
+
 			} else {
 				util.deleteProfile(savePath);
+				mapper.updateProfile(param);
 				current_user.setProfile(null);
 			}
+			
 			return 1;
 		} catch (Exception e) {}
 		

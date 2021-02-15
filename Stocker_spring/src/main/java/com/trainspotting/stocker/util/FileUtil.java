@@ -6,11 +6,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -69,20 +71,28 @@ public class FileUtil {
 		ImageIO.write(thumb_image, extension, thumb_file);
 	}
 	
-	public void save(MultipartFile file, String savePath, String fileName, boolean createThumb) throws Exception {
-		File origin_file = new File(savePath, fileName);
-		file.transferTo(origin_file);
+	public void save(MultipartFile file, String savePath, String filename, boolean createThumb) throws Exception {
+		File path = new File(savePath);
+		
+		if(!path.exists()) {
+			path.mkdirs();
+		}
+		
+		File newFile = new File(savePath, filename);
+		file.transferTo(newFile);
 		
 		if(createThumb) {
-			saveThumb(origin_file, savePath, 600);
+			saveThumb(newFile, savePath, 600);
 		}
 	}
 	
-	public void updateProfile(MultipartFile file ,String savePath, String fileName) {
-		try {
+	public void updateProfile(MultipartFile file ,String savePath, String filename) throws Exception {
+		File path = new File(savePath);
+		if(path.exists()) {
 			deleteProfile(savePath);
-			save(file, savePath, fileName, false);
-		} catch (Exception e) {}
+		}
+		
+		save(file, savePath, filename, false);
 	}
 
 	public void deleteProfile(String savedPath) throws Exception {
