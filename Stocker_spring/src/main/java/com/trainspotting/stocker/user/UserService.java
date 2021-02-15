@@ -72,7 +72,9 @@ public class UserService {
 				}
 			}
 			return 1;
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return 0;
 	}
